@@ -26,11 +26,22 @@ class Solution:
         return self.res
 
     def postorderTraversal(self, root):
+        lastVisit = root
         if root==None:
             return self.res
         while(root or len(self.stack)>0):
-            while()
-
+            while(root):
+                self.stack.append(root)
+                root = root.left
+            root = self.stack[-1]
+            if root.right == None or root.right == lastVisit:
+                self.res.append(root.val)
+                self.stack.pop()
+                lastVisit = root
+                root = None
+            else:
+                root = root.right
+        return self.res
 
 
 
@@ -54,4 +65,4 @@ if __name__ == '__main__':
     l3.left = l6
     S = Solution()
     print(root)
-    print(S.inorderTraversal(root))
+    print(S.postorderTraversal(root))
